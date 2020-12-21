@@ -1,15 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.binarysearchtree;
 
-/**
- *
- * @author walde
- */
-
+//Tree diagram
 //                 50
 //
 //         30             80
@@ -33,6 +24,15 @@ public class Main {
         tree.insert(55);
         tree.insert(90);
         tree.insert(105);
+        
+        System.out.println("Is 70 in the tree? " + (tree.search(70) ? "Yes" : "No") );
+        System.out.println("Is 12 in the tree? " + (tree.search(12) ? "Yes" : "No") );
+        System.out.println("Is 55 in the tree? " + (tree.search(55) ? "Yes" : "No") );
+        System.out.println("Is 40 in the tree? " + (tree.search(40) ? "Yes" : "No") );
+        System.out.println("Is 5 in the tree? " + (tree.search(5) ? "Yes" : "No") );
+        System.out.println("Is 6 in the tree? " + (tree.search(6) ? "Yes" : "No") );
+        System.out.println("Is 48 in the tree? " + (tree.search(48) ? "Yes" : "No") );
+        System.out.println("Is 47 in the tree? " + (tree.search(47) ? "Yes" : "No") );
         
         System.out.print("Inorder: ");
         tree.inOrder(root);

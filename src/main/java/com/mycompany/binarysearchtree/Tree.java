@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.binarysearchtree;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
-/**
- *
- * @author walde
- */
 public class Tree {
     private Node root;
     
@@ -47,9 +40,31 @@ public class Tree {
         return root;
     }
     
-    //delete
-    
     //search
+    public boolean search(int key){
+       Node keyNode = this.searchRecursive(this.root, key);   
+       if ( keyNode != null ){
+           return true;
+       }
+       else {
+           return false;
+       }
+    }
+     
+    public Node searchRecursive(Node<Integer> root, Integer key){
+        //base case is root null or key found
+        if ( root == null || root.getData().equals(key) ){
+            return root;
+        }
+        //if key less than root key, traverse left subtree
+        if ( key < root.getData()){
+            return searchRecursive(root.getLeft(), key);
+        }
+        //if key greater than root key, traverse right subtree
+        return searchRecursive(root.getRight(), key);
+    }
+    
+    //delete
     
     //get number of levels
     
