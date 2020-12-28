@@ -25,14 +25,34 @@ public class Main {
         tree.insert(90);
         tree.insert(105);
         
-        System.out.println("Is 70 in the tree? " + (tree.search(70) ? "Yes" : "No") );
-        System.out.println("Is 12 in the tree? " + (tree.search(12) ? "Yes" : "No") );
-        System.out.println("Is 55 in the tree? " + (tree.search(55) ? "Yes" : "No") );
-        System.out.println("Is 40 in the tree? " + (tree.search(40) ? "Yes" : "No") );
-        System.out.println("Is 5 in the tree? " + (tree.search(5) ? "Yes" : "No") );
-        System.out.println("Is 6 in the tree? " + (tree.search(6) ? "Yes" : "No") );
-        System.out.println("Is 48 in the tree? " + (tree.search(48) ? "Yes" : "No") );
-        System.out.println("Is 47 in the tree? " + (tree.search(47) ? "Yes" : "No") );
+        System.out.println("Tree has " + tree.getNumberOfNodes() + " nodes.");
+        
+        System.out.println("Is 70 in the tree? " + (tree.contains(70) ? "Yes" : "No") );
+        System.out.println("Is 12 in the tree? " + (tree.contains(12) ? "Yes" : "No") );
+        System.out.println("Is 55 in the tree? " + (tree.contains(55) ? "Yes" : "No") );
+        System.out.println("Is 40 in the tree? " + (tree.contains(40) ? "Yes" : "No") );
+        System.out.println("Is 5 in the tree? " + (tree.contains(5) ? "Yes" : "No") );
+        System.out.println("Is 6 in the tree? " + (tree.contains(6) ? "Yes" : "No") );
+        System.out.println("Is 48 in the tree? " + (tree.contains(48) ? "Yes" : "No") );
+        System.out.println("Is 47 in the tree? " + (tree.contains(47) ? "Yes" : "No") );
+        
+        Node node45 = tree.search(45);
+        String leftNode45 = node45.getLeft() == null ? "empty" : node45.getLeft().getData().toString();
+        String rightNode45 = node45.getRight() == null ? "empty" : node45.getRight().getData().toString();
+        String parentNode45 = node45.getParent() == null ? "empty" : node45.getParent().getData().toString();
+        System.out.println("Node 45 left child: " + leftNode45 + " right child: " + rightNode45 + " parent: " + parentNode45);
+        
+        Node node70 = tree.search(70);
+        String leftNode70 = node70.getLeft() == null ? "empty" : node70.getLeft().getData().toString();
+        String rightNode70 = node70.getRight() == null ? "empty" : node70.getRight().getData().toString();
+        String parentNode70 = node70.getParent() == null ? "empty" : node70.getParent().getData().toString();
+        System.out.println("Node 70 left child: " + leftNode70 + " right child: " + rightNode70 + " parent: " + parentNode70);
+        
+        Node node105 = tree.search(105);
+        String leftNode105 = node105.getLeft() == null ? "empty" : node105.getLeft().getData().toString();
+        String rightNode105 = node105.getRight() == null ? "empty" : node105.getRight().getData().toString();
+        String parentNode105 = node105.getParent() == null ? "empty" : node105.getParent().getData().toString();
+        System.out.println("Node 105 left child: " + leftNode105 + " right child: " + rightNode105 + " parent: " + parentNode105);
         
         System.out.print("Inorder: ");
         tree.inOrder(root);

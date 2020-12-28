@@ -6,13 +6,13 @@ import java.util.Objects;
 import java.util.Queue;
 
 public class Tree {
-    private Node root;
+    private Node<Integer> root;
     
-    public Tree(Node root){
+    public Tree(Node<Integer> root){
         this.root = root;
     }
     
-    public Node getRoot(){return this.root;}
+    public Node<Integer> getRoot(){return this.root;}
     
     //print the tree
     @Override
@@ -22,27 +22,28 @@ public class Tree {
         return treeSb.toString();
     }
     
-    public Node insert(int key){
-        return this.insertRecursive(this.root, key);
+    //insert new node
+    public Node<Integer> insert(int key){
+        return this.insertRecursive(this.root, null, key);
     }
     
-    public Node insertRecursive(Node<Integer> root, Integer key){
+    public Node<Integer> insertRecursive(Node<Integer> root, Node<Integer> parent, Integer key){
         if ( root == null ){
-            return new Node(key);
+            return new Node(parent, key);
         }
         
         if ( key < root.getData() ){
-            root.setLeft(insertRecursive(root.getLeft(), key));
+            root.setLeft(insertRecursive(root.getLeft(), root, key));
         }
         else if ( key > root.getData() ){
-            root.setRight(insertRecursive(root.getRight(), key));
+            root.setRight(insertRecursive(root.getRight(), root, key));
         }
         return root;
     }
     
-    //search
-    public boolean search(int key){
-       Node keyNode = this.searchRecursive(this.root, key);   
+    //does tree contain a node
+    public boolean contains(int key){
+       Node<Integer> keyNode = this.searchRecursive(this.root, key);   
        if ( keyNode != null ){
            return true;
        }
@@ -50,8 +51,13 @@ public class Tree {
            return false;
        }
     }
+    
+    //find and return node
+    public Node<Integer> search(int key){
+       return this.searchRecursive(this.root, key);   
+    }
      
-    public Node searchRecursive(Node<Integer> root, Integer key){
+    public Node<Integer> searchRecursive(Node<Integer> root, Integer key){
         //base case is root null or key found
         if ( root == null || root.getData().equals(key) ){
             return root;
@@ -64,17 +70,39 @@ public class Tree {
         return searchRecursive(root.getRight(), key);
     }
     
-    //delete
+    //delete a node
+    public boolean delete(int key){
+        return false;
+    }
     
+    //get number of nodes
+    public int getNumberOfNodes(){
+        Queue<Node<Integer>> queue = new LinkedList();
+        int numNodes = 0;
+        if (root == null) {return numNodes;}
+        queue.add(root);
+        
+        //use a queue to list the nodes breadth first
+        while (!queue.isEmpty()){
+            Node<Integer> n = queue.remove();
+            numNodes++;
+            //if we have left node, add it to the end of the queue
+            if ( n.getLeft() != null){
+                queue.add(n.getLeft());
+            }
+            //if we have right node, add it to the end of the queue
+            if ( n.getRight() != null){
+                queue.add(n.getRight());
+            }
+        }
+        
+        return numNodes;
+    }
+   
     //get number of levels
     
-    //breadth first
-//    public String breadthFirst(Node<Integer> root){
-//        
-//    }
-    
     //in order (left root right)
-    public void inOrder(Node root)  { 
+    public void inOrder(Node<Integer> root)  { 
         if (root == null) 
             return;
         
@@ -89,7 +117,7 @@ public class Tree {
     } 
     
     //pre order (root left right)
-    public void preOrder(Node root)  { 
+    public void preOrder(Node<Integer> root)  { 
         if (root == null) 
             return; 
         
@@ -104,7 +132,7 @@ public class Tree {
     } 
         
     //post order (left right root)
-    public void postOrder(Node root)  { 
+    public void postOrder(Node<Integer> root)  { 
         if (root == null) 
             return;     
         
@@ -119,14 +147,14 @@ public class Tree {
     } 
     
     //first level, then second level, etc
-    public void breadthFirst(Node root){
+    public void breadthFirst(Node<Integer> root){
         Queue<Node> queue = new LinkedList();
         if (root == null) {return;}
         queue.add(root);
         
         //use a queue to list the nodes breadth first
         while (!queue.isEmpty()){
-            Node n = queue.remove();
+            Node<Integer> n = queue.remove();
             System.out.print(n.getData() + " ");
             //if we have left node, add it to the end of the queue
             if ( n.getLeft() != null){
