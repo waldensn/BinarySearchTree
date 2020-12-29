@@ -71,8 +71,56 @@ public class Tree {
     }
     
     //delete a node
-    public boolean delete(int key){
-        return false;
+    public void delete(int key){
+        root = deleteRecursive(root, key);
+    }
+    
+    public Node<Integer> deleteRecursive(Node<Integer> root, int key){
+        if ( root == null ){
+            return root;
+        }
+        //if key less than root key, traverse left subtree
+        if ( key < root.getData() ){
+            root.setLeft( deleteRecursive(root.getLeft(), key) );
+        }
+        //if key greater than root key, traverse right subtree
+        else if ( key > root.getData() ){
+            root.setRight( deleteRecursive(root.getRight(), key) );
+        }
+        //found node to delete
+        else
+        {
+            //node to delete has zero or one child node
+            if ( root.getLeft() == null ){
+                if ( root.getRight() != null ){
+                    root.getRight().setParent(root.getParent());
+                }
+                return root.getRight();
+            }
+            else if ( root.getRight() == null ){
+                if ( root.getLeft() != null ){
+                    root.getLeft().setParent(root.getParent());
+                }
+                return root.getLeft();
+            }
+            
+            //node to delete has two children, so find the smallest node on the right subtree
+            //replace the node to delete with that node, then delete the smallest node on the right subtree
+            root.setData( getMinValue( root.getRight() ) );
+            root.setRight( deleteRecursive(root.getRight(), root.getData()) );
+        }
+        
+        return root;
+    }
+    
+    //get smallest key from a tree
+    public Integer getMinValue(Node<Integer> root){
+        Integer minValue = root.getData();
+        while ( root.getLeft() != null ){
+            minValue = (Integer)root.getLeft().getData();
+            root = root.getLeft();
+        }
+        return minValue;
     }
     
     //get number of nodes

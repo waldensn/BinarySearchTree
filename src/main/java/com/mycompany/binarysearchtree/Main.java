@@ -53,7 +53,29 @@ public class Main {
         String rightNode105 = node105.getRight() == null ? "empty" : node105.getRight().getData().toString();
         String parentNode105 = node105.getParent() == null ? "empty" : node105.getParent().getData().toString();
         System.out.println("Node 105 left child: " + leftNode105 + " right child: " + rightNode105 + " parent: " + parentNode105);
+
+        tree.delete(80);
+        Node node90 = tree.search(90);
+        String leftNode90 = node90.getLeft() == null ? "empty" : node90.getLeft().getData().toString();
+        String rightNode90 = node90.getRight() == null ? "empty" : node90.getRight().getData().toString();
+        String parentNode90 = node90.getParent() == null ? "empty" : node90.getParent().getData().toString();
+        System.out.println("Node 90 left child: " + leftNode90 + " right child: " + rightNode90 + " parent: " + parentNode90);
         
+        Node node95 = tree.search(95);
+        String leftNode95 = node95.getLeft() == null ? "empty" : node95.getLeft().getData().toString();
+        String rightNode95 = node95.getRight() == null ? "empty" : node95.getRight().getData().toString();
+        String parentNode95 = node95.getParent() == null ? "empty" : node95.getParent().getData().toString();
+        System.out.println("Node 95 left child: " + leftNode95 + " right child: " + rightNode95 + " parent: " + parentNode95);
+        
+        //Tree diagram
+//                 50
+//
+//         30             90
+//
+//      10   45         70   95
+//
+//     5    35  48    55       105
+
         System.out.print("Inorder: ");
         tree.inOrder(root);
         System.out.println();

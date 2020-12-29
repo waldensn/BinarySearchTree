@@ -87,6 +87,47 @@ public class BinarySearchTreeTest {
         assertEquals(this.tree.getNumberOfNodes(), 15);
     }
     
+    @Test
+    public void testDeleteNode() throws Exception{
+        assertTrue(tree.contains(5));
+        assertEquals(this.tree.getNumberOfNodes(), 13);
+        tree.delete(5);
+        assertFalse(tree.contains(5));
+        assertEquals(this.tree.getNumberOfNodes(), 12);
+
+        Node node10 = tree.search(10);
+        assertNull(node10.getLeft());
+        assertNull(node10.getRight());
+        assertEquals(node10.getParent().getData(), 30); 
+        
+        assertTrue(tree.contains(70));
+        assertEquals(this.tree.getNumberOfNodes(), 12);
+        tree.delete(70);
+        assertFalse(tree.contains(70));
+        assertEquals(this.tree.getNumberOfNodes(), 11);
+        
+        Node node55 = tree.search(55);
+        assertNull(node55.getLeft());
+        assertNull(node55.getRight());
+        assertEquals(node55.getParent().getData(), 80); 
+        
+        assertTrue(tree.contains(30));
+        assertEquals(this.tree.getNumberOfNodes(), 11);
+        tree.delete(30);
+        assertFalse(tree.contains(30));
+        assertEquals(this.tree.getNumberOfNodes(), 10);
+        
+        Node node35 = tree.search(35);
+        assertEquals(node35.getLeft().getData(), 10);
+        assertEquals(node35.getRight().getData(), 45);
+        assertEquals(node35.getParent().getData(), 50); 
+        
+        Node node45 = tree.search(45);
+        assertNull(node45.getLeft());
+        assertEquals(node45.getRight().getData(), 48);
+        assertEquals(node45.getParent().getData(), 35);
+    }
+    
 //    @Test
 //    public void testTraversals() throws Exception{
 //        
