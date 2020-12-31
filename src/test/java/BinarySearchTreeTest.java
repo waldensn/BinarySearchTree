@@ -18,8 +18,8 @@ public class BinarySearchTreeTest {
     
     @Before
     public void setUpClass() {
-        Node root = new Node(50);
-        tree = new Tree(root);
+        tree = new Tree();
+        tree.insert(50);
         tree.insert(30);
         tree.insert(80);
         tree.insert(10);
@@ -85,6 +85,10 @@ public class BinarySearchTreeTest {
         assertEquals(this.tree.getNumberOfNodes(), 14);
         tree.insert(6);
         assertEquals(this.tree.getNumberOfNodes(), 15);
+        tree.delete(95);
+        assertEquals(this.tree.getNumberOfNodes(), 14);
+        tree.delete(48);
+        assertEquals(this.tree.getNumberOfNodes(), 13);
     }
     
     @Test
@@ -126,6 +130,36 @@ public class BinarySearchTreeTest {
         assertNull(node45.getLeft());
         assertEquals(node45.getRight().getData(), 48);
         assertEquals(node45.getParent().getData(), 35);
+    }
+    
+    @Test
+    public void testTreeHeight() throws Exception{
+        assertEquals(tree.getHeight(), 4);
+        tree.insert(4);
+        assertEquals(tree.getHeight(), 5);
+        tree.insert(3);
+        assertEquals(tree.getHeight(), 6);
+        tree.insert(7);
+        assertEquals(tree.getHeight(), 6);
+        tree.insert(106);
+        tree.insert(107);
+        tree.insert(108);
+        assertEquals(tree.getHeight(), 7);
+        tree.delete(106);
+        assertEquals(tree.getHeight(), 6);
+        
+        Tree newTree = new Tree();
+        assertEquals(newTree.getHeight(), 0);
+        newTree.insert(100);
+        assertEquals(newTree.getHeight(), 1);
+        newTree.insert(150);
+        assertEquals(newTree.getHeight(), 2);
+        newTree.insert(75);
+        assertEquals(newTree.getHeight(), 2);
+        newTree.insert(125);
+        assertEquals(newTree.getHeight(), 3);
+        newTree.delete(125);
+        assertEquals(newTree.getHeight(), 2);
     }
     
 //    @Test

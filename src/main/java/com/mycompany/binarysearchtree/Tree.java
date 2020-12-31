@@ -8,6 +8,10 @@ import java.util.Queue;
 public class Tree {
     private Node<Integer> root;
     
+    public Tree(){
+        this.root = null;
+    }
+    
     public Tree(Node<Integer> root){
         this.root = root;
     }
@@ -23,8 +27,8 @@ public class Tree {
     }
     
     //insert new node
-    public Node<Integer> insert(int key){
-        return this.insertRecursive(this.root, null, key);
+    public void insert(int key){
+        root = insertRecursive(this.root, null, key);
     }
     
     public Node<Integer> insertRecursive(Node<Integer> root, Node<Integer> parent, Integer key){
@@ -147,25 +151,56 @@ public class Tree {
         return numNodes;
     }
    
-    //get number of levels
+    //get height of tree
+    //height of empty tree is zero
+    public int getHeight(){
+        return this.getHeightRecursive(root);
+    }
+    
+    public int getHeightRecursive(Node<Integer> root){
+        if ( root == null ){
+            return 0;
+        }
+        else {
+            //get height of subtree
+            int leftHeight = getHeightRecursive(root.getLeft());
+            int rightHeight = getHeightRecursive(root.getRight());
+            
+            //return larger of the two heights
+            if ( leftHeight > rightHeight ){
+                return leftHeight + 1;
+            }
+            else {
+                return rightHeight + 1;
+            }
+        }   
+    }
     
     //in order (left root right)
-    public void inOrder(Node<Integer> root)  { 
+    public void inOrder(){
+        this.printInOrder(root);
+    }
+    
+    public void printInOrder(Node<Integer> root)  { 
         if (root == null) 
             return;
         
         //traverse left subtree recursively
-        inOrder(root.getLeft()); 
+        printInOrder(root.getLeft()); 
    
         //root node
         System.out.print(root.getData() + " "); 
    
         //traverse right subtree recursively
-        inOrder(root.getRight()); 
+        printInOrder(root.getRight()); 
     } 
     
     //pre order (root left right)
-    public void preOrder(Node<Integer> root)  { 
+    public void preOrder(){
+        this.printPreOrder(root);
+    }
+    
+    public void printPreOrder(Node<Integer> root)  { 
         if (root == null) 
             return; 
         
@@ -173,29 +208,33 @@ public class Tree {
         System.out.print(root.getData() + " "); 
         
         //traverse left subtree recursively
-        preOrder(root.getLeft());  
+        printPreOrder(root.getLeft());  
    
         //traverse right subtree recursively
-        preOrder(root.getRight()); 
+        printPreOrder(root.getRight()); 
     } 
         
     //post order (left right root)
-    public void postOrder(Node<Integer> root)  { 
+    public void postOrder(){
+        this.printPostOrder(root);
+    }
+    
+    public void printPostOrder(Node<Integer> root)  { 
         if (root == null) 
             return;     
         
         //traverse left subtree recursively
-        postOrder(root.getLeft());  
+        printPostOrder(root.getLeft());  
    
         //traverse right subtree recursively
-        postOrder(root.getRight()); 
+        printPostOrder(root.getRight()); 
         
         //root node
         System.out.print(root.getData() + " "); 
     } 
     
     //first level, then second level, etc
-    public void breadthFirst(Node<Integer> root){
+    public void breadthFirst(){
         Queue<Node> queue = new LinkedList();
         if (root == null) {return;}
         queue.add(root);
