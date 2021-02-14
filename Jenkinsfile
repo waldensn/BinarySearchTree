@@ -5,7 +5,7 @@ pipeline {
         stage('Example Build') {
            steps {
                 echo 'Hello, Maven'
-                sh 'sudo mvn --version'
+                sh 'mvn -version'
             }
         }
     }
